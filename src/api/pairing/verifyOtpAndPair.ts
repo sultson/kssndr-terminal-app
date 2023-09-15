@@ -10,7 +10,6 @@ export const verifyOtpAndPair = async ({otp}: {otp: number}) => {
             otp,
         }
     })
-    console.log(JSON.stringify({ data, error }))
     if (!error) {
         useBoundStore.setState({ pairingId: data?.pairingId })
     }

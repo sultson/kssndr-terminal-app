@@ -1,8 +1,6 @@
-// In App.js in a new project
 import * as React from 'react';
-import { useState } from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native'
-import { colors } from '../theme/colors';
+import { useTheme } from '../theme/useTheme';
 
 interface BtnSubtleProps {
   label?: string;
@@ -10,7 +8,7 @@ interface BtnSubtleProps {
 }
 
 export const BtnSubtle = ({label, onPress}: BtnSubtleProps) => {
- 
+  const theme = useTheme()
   return (
     <Pressable 
      
@@ -22,9 +20,8 @@ export const BtnSubtle = ({label, onPress}: BtnSubtleProps) => {
             
         ]}
         onPress={onPress}
-        //android_ripple={{ radius:30}}
     >
-      <Text style={styles.btnText}>{label}</Text>
+      <Text style={[styles.btnText, {color: theme.colors.secondary}]}>{label}</Text>
     </Pressable>   
   );
 }
@@ -42,7 +39,6 @@ const styles = StyleSheet.create({
     btnText: {
         fontSize: 15,
         fontWeight:'600',
-        color: 'gray',
         textDecorationLine: 'underline',
     }
 });

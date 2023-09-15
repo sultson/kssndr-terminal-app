@@ -1,11 +1,10 @@
 import {Alert} from 'react-native';
 
 
-export const createLoginFailedAlert = () => {
+export const createLoginFailedAlert = (title: string, msg: string) => {
     try {
 
-        Alert.alert('Login failed', 
-        `Please restart the device by holding down the power button and selecting "Restart".\nContact Kassandra Support if restarting does not resolve the issue.`, 
+        Alert.alert(title, msg, 
         [], {cancelable: false}
         );
     } catch (e) {

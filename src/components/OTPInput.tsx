@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { TextInput, Text, Pressable, View, StyleSheet } from "react-native";
-import { colors } from "../theme/colors";
+import { useTheme } from "../theme/useTheme";
 
 interface OTPInputProps {
   code: string;
@@ -12,9 +12,8 @@ interface OTPInputProps {
 const OTPInput = ({ code, setCode, maximumLength, setIsPinReady }: OTPInputProps) => {
   const boxArray = new Array(maximumLength).fill(0);
   const inputRef: any= useRef();
-
   const [isInputBoxFocused, setIsInputBoxFocused] = useState(false);
-
+  const theme = useTheme()
   const handleOnPress = () => {
     setIsInputBoxFocused(true);
     inputRef?.current?.focus();
@@ -44,8 +43,8 @@ const OTPInput = ({ code, setCode, maximumLength, setIsPinReady }: OTPInputProps
 
 
     return (
-      <View key={index} style={[styles.boxDigit, {borderColor: isValueFocused ? colors.primary : undefined}]}>
-        <Text style={styles.digit}>{digit}</Text>
+      <View key={index} style={[styles.boxDigit, {borderColor: isValueFocused ? theme.colors.accent : theme.colors.text, borderRadius: theme.borderRadius, backgroundColor: theme.colors.background}]}>
+        <Text style={[styles.digit, {color: theme.colors.text}]}>{digit}</Text>
       </View>
     );
   };
@@ -78,17 +77,13 @@ const styles = StyleSheet.create({
   },
   boxDigit: {
     borderWidth:2,
-    borderColor:'black',
-    borderRadius:10,
     width:'15%',
     height:60,
-    backgroundColor:'white',
     justifyContent:'center',
     alignItems:'center',
   },
   digit: {
     fontSize:30,
-    color:'black'
   },
   boxesContainer: {
     flexDirection:'row',

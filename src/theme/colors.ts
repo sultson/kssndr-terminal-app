@@ -1,3 +1,4 @@
 export const colors = {
-    primary: '#5A55F4'
+    primary: '#3F80FF'
 }
+export const borderRadius = 20

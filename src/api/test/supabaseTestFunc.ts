@@ -9,6 +9,5 @@ export const supabaseTestFunc = async () => {
             name:"Worked and go to sleep now"
         }
     })
-    console.log(JSON.stringify({ data, error }))
     return { data , error }
 }

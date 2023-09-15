@@ -1,8 +1,7 @@
-// In App.js in a new project
 import * as React from 'react';
-import { useState } from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native'
-import { colors } from '../theme/colors';
+import { useTheme } from '../theme/useTheme';
+import { hexToRGB } from '../utils/hexToRGB';
 
 interface BtnProps {
   label?: string;
@@ -11,7 +10,7 @@ interface BtnProps {
 }
 
 export const Btn = ({label, onPress, disabled}: BtnProps) => {
- 
+  const theme = useTheme()
   return (
     <Pressable 
      
@@ -19,6 +18,12 @@ export const Btn = ({label, onPress, disabled}: BtnProps) => {
             styles.btn,
             {
                 opacity: pressed ? 0.7 : 1,
+                backgroundColor: theme.colors.accent,
+                borderRadius: theme.borderRadius,
+                //elevation:1,
+                borderWidth:1.5,
+                borderColor:hexToRGB(theme.colors.accent,0.7)
+
             },
             
         ]}
@@ -33,11 +38,9 @@ export const Btn = ({label, onPress, disabled}: BtnProps) => {
 
 const styles = StyleSheet.create({
     btn: {
-      backgroundColor: colors.primary,
       padding:10,
       justifyContent:'center',
       alignItems:'center',
-      borderRadius:10,
       paddingLeft: 30,
       paddingRight:30,
       margin:10

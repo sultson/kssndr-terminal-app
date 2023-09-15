@@ -11,16 +11,72 @@ import { OtpScreen } from '../screens/OtpScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import { useBoundStore } from '../store/useBoundStore';
 import { MainScreen } from '../screens/MainScreen';
+import { MainScreenDEBUG } from '../screens/MainScreenDEBUG';
+
+interface TerminalDocUpdateProps {
+  errors?: any;
+  new: {
+    config?: any;
+    is_enabled?: boolean;
+    account_id?: string;
+    pairing_id?: string;
+  }
+}
+
+
 
 
 const Stack = createNativeStackNavigator();
 
 export const RootStackNavigator = () => {
+    const TAG = 'navigation/RootStackNavigator'
     const [session, setSession] = useState({user: {id: null}})
     const [init, setInit] = useState(true)
     const pairingId = useBoundStore((state: any) => state.pairingId)
-    console.log(pairingId)
-    console.log(JSON.stringify(session))
+    const updateConfig = useBoundStore((state: any) => state.updateConfig)
+    const config = useBoundStore((state: any) => state.config)
+    const updateAccountId = useBoundStore((state: any) => state.updateAccountId)
+    const updatePairingId = useBoundStore((state: any) => state.updatePairingId)
+
+    console.log(TAG + ' RENDER')
+
+    async function getConfig(id: string) {
+      const { data, error } = await supabase
+      .from('terminals')
+      .select()
+      .eq('id', id)
+      if (error) {
+        console.log(error)
+        return
+      }
+
+      const initUpdate : TerminalDocUpdateProps = {
+        errors: null,
+        new: {
+          config: data?.[0]?.config,
+          is_enabled: data?.[0]?.is_enabled,
+          account_id: data?.[0]?.account_id,
+          pairing_id: data?.[0]?.pairing_id
+        }
+      }
+      terminalDocListenerCallback(initUpdate)
+    }
+
+    async function terminalDocListenerCallback(update: TerminalDocUpdateProps) {
+      try {
+        //console.log(TAG + ` got update: ${JSON.stringify(update)}`)
+        if (update?.errors || !update?.new?.config) throw `Error when received payload: ${JSON.stringify(update?.errors)}`
+        const config = update.new.config
+        if (!config?.language || !config?.appearance) throw `Invalid config received..`
+        updateConfig(config)
+        updateAccountId(update?.new?.account_id)
+        updatePairingId(update?.new?.pairing_id)
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     useEffect(() => {
         supabase.auth.getSession().then(({ data }) => {
           const session: any  = data.session
@@ -32,6 +88,39 @@ export const RootStackNavigator = () => {
           setSession(session)
         })
     }, [])
+    
+    useEffect(() => {
+      if (!(session?.user?.id)) {
+        updatePairingId(null)
+        return
+      } 
+      getConfig(session.user.id)
+      const channel = supabase
+      .channel('terminal-doc')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'terminals',
+          filter: `id=eq.${session.user.id}`
+
+        },
+        async (update) => await terminalDocListenerCallback(update)
+      )
+      .subscribe(
+        (s) => {
+          //console.log(`${TAG}: Channel subscription status: ${s}`)
+        }
+      )
+
+      async function removeSubscription() {
+        await supabase.removeChannel(channel)
+      }
+      return () => {
+        removeSubscription()
+      }
+    }, [session])
 
     if (init) {return <LoadingScreen msg={"Initializing.."}/>}
 
@@ -42,7 +131,7 @@ export const RootStackNavigator = () => {
           
             pairingId ? 
             
-              <Stack.Screen name="Main" component={MainScreen} initialParams={{ userId: session.user.id }} />   
+              <Stack.Screen name="Main" component={config?.debugMode ? MainScreenDEBUG : MainScreen} initialParams={{ userId: session.user.id }} />   
           
               :
           

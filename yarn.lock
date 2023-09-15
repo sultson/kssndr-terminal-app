@@ -1417,18 +1417,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pusher/pusher-websocket-react-native@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@pusher/pusher-websocket-react-native/-/pusher-websocket-react-native-1.2.1.tgz#0010120f7c0384fbad70811d90e5c47a6fbcab69"
-  integrity sha512-twnoyqnwUKX2qBQKzx1hNlrYCzS57lR9SBe3n3n+oOfsYaJSIGUyy11CilKn0s9fjPRV6D9g+2PJNTzhtRc3nA==
-
-"@react-native-async-storage/async-storage@^1.17.11":
-  version "1.17.11"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
-  integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
-  dependencies:
-    merge-options "^3.0.4"
-
 "@react-native-community/cli-clean@^10.1.1":
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-clean/-/cli-clean-10.1.1.tgz#4c73ce93a63a24d70c0089d4025daac8184ff504"
@@ -4107,11 +4095,6 @@ is-path-inside@^3.0.3:
   resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-3.0.3.tgz#d231362e53a07ff2b0e0ea7fed049161ffd16283"
   integrity sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==
 
-is-plain-obj@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
-  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
-
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
@@ -4954,13 +4937,6 @@ memoize-one@^5.0.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
   integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
-
-merge-options@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-3.0.4.tgz#84709c2aa2a4b24c1981f66c179fe5565cc6dbb7"
-  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
-  dependencies:
-    is-plain-obj "^2.1.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -5926,6 +5902,16 @@ react-native-gradle-plugin@^0.71.13:
   version "0.71.13"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.13.tgz#6f60ff24ac712554903dfc0ae98475cb280c57a6"
   integrity sha512-C66LNZAXbU0YDRkWx8d/8kjesdu7fsUAc/3QPJNftSXKEvEtnFZK2aH/rIgu1s5dbTcE0fjhdVPNJMRIfKo61w==
+
+react-native-idle-timer@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-idle-timer/-/react-native-idle-timer-2.2.0.tgz#ffa693b03029c4428e5e6173c75381489ac1fb23"
+  integrity sha512-9D4NLgYys+mmYDkw0OpaHYv7EY2ToTEbrV/7CYkIGZIMGlue/jn0boPDtnocbZl1rciUD7rspOaB6Mdbq5SBBQ==
+
+react-native-immersive-mode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-immersive-mode/-/react-native-immersive-mode-2.0.0.tgz#4183dad2bd46c02153e4520ec4bfaeb03713cc04"
+  integrity sha512-qpn7L9AckhE7rvHNaxjZlIp2RDa5QUBLmDOB5IoyatGq9Ahhx3AjH0ZtZVFcP28gS5emZ6/j9tehCEwXyLWl6Q==
 
 react-native-mmkv@^2.6.1:
   version "2.6.1"
